@@ -63,6 +63,7 @@ const base = {
 
 const dev = {
     devtool: 'source-map',
+    historyApiFallback: true,
 };
 
 const prod = {

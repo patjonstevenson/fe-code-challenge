@@ -1,24 +1,24 @@
-import React from 'react';
-import { render } from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
 import '../style/index.scss';
 
-class App extends React.Component {
-  getWelcomeText = () => {
-    return 'Show Me a Category Page Please';
-  }
+import { createStore, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
+import { Provider } from "react-redux";
+import rootReducer from "../state/reducer";
 
-  render() {
-    const welcomeText = this.getWelcomeText();
-    return (
-      <div>
-        <h1>{welcomeText}</h1>
-      </div>
-    );
-  }
-}
+import { BrowserRouter as Router } from "react-router-dom";
 
-render(
-  <App />,
-  document.getElementById('app'),
+import App from "./App";
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
+
+ReactDOM.render(
+    <Provider store={store}>
+        <Router>
+            <App />
+        </Router>
+    </Provider>
+    , document.getElementById('app')
 );
